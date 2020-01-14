@@ -1,14 +1,14 @@
 #!/bin/sh
 if test "$DRONE_BUILD_EVENT" = 'push';then
   if test "$DRONE_BRANCH" = 'master';then
-    echo "${PLUGIN_TAG_PREFIX}latest" > .tags
+    echo "latest${PLUGIN_TAG_SUFFIX}" > .tags
   else
-    echo "${PLUGIN_TAG_PREFIX}${DRONE_BRANCH}" > .tags
+    echo "${DRONE_BRANCH}${PLUGIN_TAG_SUFFIX}" > .tags
   fi
 elif test "$DRONE_BUILD_EVENT" = 'tag';then
   TAG="${DRONE_TAG##v}"
-  MINOR_TAG="${PLUGIN_TAG_PREFIX}${TAG%.*}"
-  MAJOR_TAG="${PLUGIN_TAG_PREFIX}${TAG%%.*}"  
+  MINOR_TAG="${TAG%.*}${PLUGIN_TAG_SUFFIX}"
+  MAJOR_TAG="${TAG%%.*}${PLUGIN_TAG_SUFFIX}"  
 
-  echo "${PLUGIN_TAG_PREFIX}${TAG},${MINOR_TAG},${MAJOR_TAG}" > .tags
+  echo "${TAG}${PLUGIN_TAG_SUFFIX},${MINOR_TAG},${MAJOR_TAG}" > .tags
 fi
