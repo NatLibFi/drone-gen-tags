@@ -8,4 +8,4 @@ pipeline:
     - docker_password
     when:
       event: [push]
-branches: [master]
+branches: [feature/better-tagging]
