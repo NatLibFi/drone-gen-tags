@@ -2,6 +2,8 @@
 if test "$DRONE_BUILD_EVENT" = 'push';then
   if test "$DRONE_BRANCH" = 'master';then
     echo "latest${PLUGIN_TAG_SUFFIX}" > .tags
+  elif test "$DRONE_BRANCH" = 'main';then
+    echo "latest${PLUGIN_TAG_SUFFIX}" > .tags    
   else
     echo "${DRONE_BRANCH}${PLUGIN_TAG_SUFFIX}" > .tags
   fi
